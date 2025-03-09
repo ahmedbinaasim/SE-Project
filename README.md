@@ -33,19 +33,38 @@ The **AI-Powered Study Notes Organizer** is designed to help students and resear
 ## 📂 Project Structure
 
 ```
-.
-├── client/                  # Next.js (TypeScript, TailwindCSS)
-│   ├── components/
-│   ├── pages/
-│   ├── public/
-│   └── ...
-├── server/                  # Node.js, Express, MongoDB
-│   ├── models/
-│   ├── routes/
-│   ├── controllers/
-│   └── ...
-├── README.md
-└── ...
+SE-PROJECT/
+├── frontend/                  # Next.js with TypeScript & TailwindCSS
+│   ├── .eslintrc.json         # Created by Next.js setup
+│   ├── .gitignore             # Created by Next.js setup
+│   ├── next.config.js         # Created by Next.js setup
+│   ├── package.json           # Created by Next.js setup
+│   ├── tsconfig.json          # Created by Next.js setup
+│   ├── tailwind.config.ts     # Created by Next.js setup
+│   ├── postcss.config.js      # Created by Next.js setup
+│   ├── public/                # Created by Next.js setup
+│   │   └── ...
+│   └── src/                   # Created by Next.js setup (or "app" depending on your choice)
+│       ├── app/               # Next.js 13+ App Router
+│       │   ├── layout.tsx
+│       │   ├── page.tsx
+│       │   └── globals.css
+│       └── ...
+│
+├── backend/                   # Node.js with Express & MongoDB
+│   ├── package.json           # Created by npm init
+│   ├── tsconfig.json          # Created by tsc --init
+│   └── src/                   # Main source directory
+│       ├── models/            # Mongoose models
+│       ├── controllers/       # Request handlers
+│       ├── routes/            # API routes
+│       ├── middleware/        # Custom middleware
+│       ├── config/            # Configuration files
+│       ├── utils/             # Utility functions
+│       ├── services/          # Business logic
+│       └── index.ts           # Will be the entry point (to be created)
+│
+└── README.md                  # Project documentation (to be created)
 ```
 
 ---
