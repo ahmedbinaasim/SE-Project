@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async');
 const ErrorResponse = require('../utils/errorResponse');
-const User = require('../models/User');
+const User = require('../models/user.model');
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -11,7 +11,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
-    // Set token from Bearer token in header
+    // Set token from Bearer token
     token = req.headers.authorization.split(' ')[1];
   }
 
@@ -25,15 +25,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = await User.findById(decoded.id);
-
-    if (!req.user) {
-      return next(new ErrorResponse('User not found', 404));
-    }
-
-    // Check if user is verified
-    if (!req.user.isVerified) {
-      return next(new ErrorResponse('Account not verified', 401));
-    }
 
     next();
   } catch (err) {
