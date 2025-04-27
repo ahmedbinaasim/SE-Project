@@ -20,7 +20,11 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: 'https://notes-genius.vercel.app/', // Replace with your Vercel frontend URL
+  credentials: true // Optional: if your app uses cookies or auth headers
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
