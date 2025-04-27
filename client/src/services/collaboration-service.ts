@@ -66,7 +66,7 @@ export async function getNoteCollaborators(noteId: string): Promise<Collaborator
 
 // Add a collaborator to a note
 export async function addCollaborator(
-  noteId: string, 
+  noteId: string | null, 
   email: string, 
   permission: string
 ): Promise<Collaborator> {
@@ -80,7 +80,7 @@ export async function addCollaborator(
 
 // Remove a collaborator from a note
 export async function removeCollaborator(
-  noteId: string, 
+  noteId: string | null, 
   collaboratorId: string
 ): Promise<void> {
   await fetchWithAuth(`${API_URL}/notes/${noteId}/collaborators/${collaboratorId}`, {
@@ -90,7 +90,7 @@ export async function removeCollaborator(
 
 // Update a collaborator's permission
 export async function updateCollaboratorPermission(
-  noteId: string,
+  noteId: string | null,
   collaboratorId: string,
   permission: string
 ): Promise<Collaborator> {

@@ -1,3 +1,62 @@
+// "use client"
+
+// import { useState, useEffect } from "react"
+// import { useRouter } from "next/navigation"
+// import { DashboardShell } from "../../../../../../components/dashboard/dashboard-shell"
+// import { Button } from "../../../../../../components/ui/button"
+// import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../../../components/ui/card"
+// import { Input } from "../../../../../../components/ui/input"
+// import { Label } from "../../../../../../components/ui/label"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../../components/ui/select"
+// import { Avatar, AvatarFallback, AvatarImage } from "../../../../../../components/ui/avatar"
+// import { useToast } from "../../../../../../hooks/use-toast"
+// import { getNoteById } from "../../../../../../services/notes-service"
+// import { getNoteCollaborators, addCollaborator, removeCollaborator, updateCollaboratorPermission } from "../../../../../../services/collaboration-service"
+// import { ChevronLeft, X, UserPlus, Mail, Copy, Link, Trash } from "lucide-react"
+// import type { Note } from "../../../../../../types/note"
+// import type { Collaborator } from "../../../../../../types/collaborator"
+
+// export default function ShareNotePage({ params }: { params: Promise<{ id: string }> }) {
+//   const { id } =  params
+//   const router = useRouter()
+//   const { toast } = useToast()
+//   const [note, setNote] = useState<Note | null>(null)
+//   const [collaborators, setCollaborators] = useState<Collaborator[]>([])
+//   const [email, setEmail] = useState("")
+//   const [permission, setPermission] = useState("view")
+//   const [loading, setLoading] = useState(true)
+//   const [adding, setAdding] = useState(false)
+//   const [error, setError] = useState<string | null>(null)
+//   const [updatingCollaboratorId, setUpdatingCollaboratorId] = useState<string | null>(null)
+//   const [isShareLinkEnabled, setIsShareLinkEnabled] = useState(true)
+
+//   // Generate a share link for the note
+//   const shareLink = typeof window !== "undefined" 
+//     ? `${window.location.origin}/dashboard/notes/${id}?shared=true` 
+//     : ""
+
+//   // Fetch the note and its collaborators
+//   useEffect(() => {
+//     const fetchNoteAndCollaborators = async () => {
+//       try {
+//         setLoading(true)
+//         setError(null)
+        
+//         const noteData = await getNoteById(id)
+//         setNote(noteData)
+        
+//         const collaboratorsData = await getNoteCollaborators(id)
+//         setCollaborators(collaboratorsData)
+//       } catch (err) {
+//         console.error("Error fetching note or collaborators:", err)
+//         setError("Failed to load note details or collaborators")
+//       } finally {
+//         setLoading(false)
+//       }
+//     }
+    
+//     fetchNoteAndCollaborators()
+//   }, [id])
 "use client"
 
 import { useState, useEffect } from "react"
@@ -16,47 +75,57 @@ import { ChevronLeft, X, UserPlus, Mail, Copy, Link, Trash } from "lucide-react"
 import type { Note } from "../../../../../../types/note"
 import type { Collaborator } from "../../../../../../types/collaborator"
 
-export default function ShareNotePage({ params }: { params: { id: string } }) {
-  const { id } = params
-  const router = useRouter()
-  const { toast } = useToast()
-  const [note, setNote] = useState<Note | null>(null)
-  const [collaborators, setCollaborators] = useState<Collaborator[]>([])
-  const [email, setEmail] = useState("")
-  const [permission, setPermission] = useState("view")
-  const [loading, setLoading] = useState(true)
-  const [adding, setAdding] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [updatingCollaboratorId, setUpdatingCollaboratorId] = useState<string | null>(null)
-  const [isShareLinkEnabled, setIsShareLinkEnabled] = useState(true)
+export default function ShareNotePage({ params }: { params: Promise<{ id: string }> }) {
+  const [id, setId] = useState<string | null>(null); // State to hold resolved id
+  const router = useRouter();
+  const { toast } = useToast();
+  const [note, setNote] = useState<Note | null>(null);
+  const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
+  const [email, setEmail] = useState("");
+  const [permission, setPermission] = useState("view");
+  const [loading, setLoading] = useState(true);
+  const [adding, setAdding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [updatingCollaboratorId, setUpdatingCollaboratorId] = useState<string | null>(null);
+  const [isShareLinkEnabled, setIsShareLinkEnabled] = useState(true);
+
+  // Resolve params Promise to get id
+  useEffect(() => {
+    const resolveParams = async () => {
+      const { id: resolvedId } = await params;
+      setId(resolvedId);
+    };
+    resolveParams();
+  }, [params]);
 
   // Generate a share link for the note
-  const shareLink = typeof window !== "undefined" 
-    ? `${window.location.origin}/dashboard/notes/${id}?shared=true` 
-    : ""
+  const shareLink = id && typeof window !== "undefined"
+    ? `${window.location.origin}/dashboard/notes/${id}?shared=true`
+    : "";
 
   // Fetch the note and its collaborators
   useEffect(() => {
+    if (!id) return; // Wait until id is resolved
     const fetchNoteAndCollaborators = async () => {
       try {
-        setLoading(true)
-        setError(null)
-        
-        const noteData = await getNoteById(id)
-        setNote(noteData)
-        
-        const collaboratorsData = await getNoteCollaborators(id)
-        setCollaborators(collaboratorsData)
+        setLoading(true);
+        setError(null);
+
+        const noteData = await getNoteById(id);
+        setNote(noteData);
+
+        const collaboratorsData = await getNoteCollaborators(id);
+        setCollaborators(collaboratorsData);
       } catch (err) {
-        console.error("Error fetching note or collaborators:", err)
-        setError("Failed to load note details or collaborators")
+        console.error("Error fetching note or collaborators:", err);
+        setError("Failed to load note details or collaborators");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    
-    fetchNoteAndCollaborators()
-  }, [id])
+    };
+
+    fetchNoteAndCollaborators();
+  }, [id]);
 
   // Handle adding a new collaborator
   const handleAddCollaborator = async (e: React.FormEvent) => {
