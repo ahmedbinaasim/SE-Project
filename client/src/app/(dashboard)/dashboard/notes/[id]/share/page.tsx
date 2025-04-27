@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../../../../../component
 import { useToast } from "../../../../../../hooks/use-toast"
 import { getNoteById } from "../../../../../../services/notes-service"
 import { getNoteCollaborators, addCollaborator, removeCollaborator, updateCollaboratorPermission } from "../../../../../../services/collaboration-service"
-import { ChevronLeft, X, UserPlus, Mail, Copy, Send, Link, Trash } from "lucide-react"
+import { ChevronLeft, X, UserPlus, Mail, Copy, Link, Trash } from "lucide-react"
 import type { Note } from "../../../../../../types/note"
 import type { Collaborator } from "../../../../../../types/collaborator"
 
@@ -154,21 +154,21 @@ export default function ShareNotePage({ params }: { params: { id: string } }) {
   }
 
   // Share via email (mock implementation)
-  const shareViaEmail = () => {
-    if (!isShareLinkEnabled) {
-      toast({
-        title: "Share link disabled",
-        description: "The share link has been disabled for this note.",
-        variant: "destructive"
-      })
-      return
-    }
-    const subject = encodeURIComponent(`Invitation to collaborate on "${note?.title}"`)
-    const body = encodeURIComponent(
-      `Hi,\n\nI've shared a note with you on NoteGenius. You can access it here:\n${shareLink}\n\nBest,\n[Your Name]`
-    )
-    window.location.href = `mailto:?subject=${subject}&body=${body}`
-  }
+  // const shareViaEmail = () => {
+  //   if (!isShareLinkEnabled) {
+  //     toast({
+  //       title: "Share link disabled",
+  //       description: "The share link has been disabled for this note.",
+  //       variant: "destructive"
+  //     })
+  //     return
+  //   }
+  //   const subject = encodeURIComponent(`Invitation to collaborate on "${note?.title}"`)
+  //   const body = encodeURIComponent(
+  //     `Hi,\n\nI've shared a note with you on NoteGenius. You can access it here:\n${shareLink}\n\nBest,\n[Your Name]`
+  //   )
+  //   window.location.href = `mailto:?subject=${subject}&body=${body}`
+  // }
 
   // Toggle share link (mock implementation)
   const toggleShareLink = () => {
@@ -268,10 +268,10 @@ export default function ShareNotePage({ params }: { params: { id: string } }) {
                   <Copy className="mr-2 h-4 w-4" />
                   Copy
                 </Button>
-                <Button variant="outline" size="sm" onClick={shareViaEmail}>
+                {/* <Button variant="outline" size="sm" onClick={shareViaEmail}>
                   <Send className="mr-2 h-4 w-4" />
                   Share via Email
-                </Button>
+                </Button> */}
               </div>
               <Button 
                 variant="outline" 

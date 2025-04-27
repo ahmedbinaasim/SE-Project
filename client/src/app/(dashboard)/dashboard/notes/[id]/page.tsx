@@ -10,6 +10,7 @@ type Props = {
   params: { id: string }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "View Note - NoteGenius",

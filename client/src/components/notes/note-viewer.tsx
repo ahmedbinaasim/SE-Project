@@ -71,7 +71,7 @@ export function NoteViewer({ noteId }: NoteViewerProps) {
   return (
     <div className="space-y-4">
       <div className="prose prose-gray dark:prose-invert max-w-none">
-        <h1>{note.title}</h1>
+        <h1 className="text-xl underline italic mb-6">{note.title}</h1>
         {note.contentHtml ? (
           <div dangerouslySetInnerHTML={{ __html: note.contentHtml }} />
         ) : (

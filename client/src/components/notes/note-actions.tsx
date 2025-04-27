@@ -20,7 +20,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog"
-import { Edit, Share2, Download, Trash2, MoreVertical, Star, FileText, Volume2, Square } from "lucide-react"
+import { Share2, Download, Trash2, MoreVertical, Star, FileText, Volume2, Square } from "lucide-react"
 import { deleteNote, toggleFavorite, getNoteById } from "../../services/notes-service"
 import { useToast } from "../../hooks/use-toast"
 import type { Note } from "../../types/note"
@@ -310,12 +310,12 @@ export function NoteActions({ noteId }: NoteActionsProps) {
           Share
         </a>
       </Button>
-      <Button variant="outline" size="sm" asChild>
+      {/* <Button variant="outline" size="sm" asChild>
         <a href={`/dashboard/notes/${noteId}/edit`}>
           <Edit className="mr-2 h-4 w-4" />
           Edit
         </a>
-      </Button>
+      </Button> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="h-8 w-8">
