@@ -58,7 +58,7 @@ export function DashboardSidebar({ className, ...props }: SidebarNavProps) {
   ]
 
   return (
-    <nav className={cn("flex flex-col space-y-1 py-4", className)} {...props}>
+    <nav className={cn("flex flex-col space-y-1 py-4 ", className)} {...props}>
       {items.map((item) => (
         <Button
           key={item.href}

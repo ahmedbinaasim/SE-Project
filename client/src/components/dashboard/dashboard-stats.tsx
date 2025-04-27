@@ -52,7 +52,7 @@
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
-import { FileText, Users, Brain, Clock } from "lucide-react"
+import { FileText, Users, Brain } from "lucide-react"
 import { Skeleton } from "../ui/skeleton"
 import { getDashboardStats } from "../../services/dashboard-service"
 
@@ -147,7 +147,7 @@ export function DashboardStats() {
           <p className="text-xs text-muted-foreground">+{stats.newAiSummariesLastMonth} from last month</p>
         </CardContent>
       </Card>
-      <Card className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
+      {/* <Card className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Study Time</CardTitle>
           <Clock className="h-4 w-4 text-muted-foreground" />
@@ -156,7 +156,7 @@ export function DashboardStats() {
           <div className="text-2xl font-bold">{stats.studyTime}h</div>
           <p className="text-xs text-muted-foreground">This week</p>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   )
 }

@@ -9,26 +9,35 @@ import { Menu, X } from "lucide-react"
 export function LandingHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Function to handle smooth scrolling
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const element = document.getElementById(targetId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 ml-4">
             <span className="text-xl font-bold">NoteGenius</span>
           </Link>
           <nav className="hidden md:flex md:gap-6 md:text-sm md:font-medium">
-            <Link href="/#features" className="transition-colors hover:text-foreground/80">
+            <Link href="/#features" onClick={(e) => handleScroll(e, "features")} className="transition-colors hover:text-foreground/80">
               Features
             </Link>
-            <Link href="/#pricing" className="transition-colors hover:text-foreground/80">
+            <Link href="/#pricing" onClick={(e) => handleScroll(e, "pricing")} className="transition-colors hover:text-foreground/80">
               Pricing
             </Link>
-            <Link href="/#testimonials" className="transition-colors hover:text-foreground/80">
+            <Link href="/#testimonials" onClick={(e) => handleScroll(e, "testimonials")} className="transition-colors hover:text-foreground/80">
               Testimonials
             </Link>
-            <Link href="/blog" className="transition-colors hover:text-foreground/80">
+            {/* <Link href="/blog" className="transition-colors hover:text-foreground/80">
               Blog
-            </Link>
+            </Link> */}
           </nav>
         </div>
         <div className="flex items-center gap-4">
@@ -49,18 +58,18 @@ export function LandingHeader() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <nav className="flex flex-col gap-4 pb-6 text-sm font-medium">
-            <Link href="/#features" className="py-2 transition-colors hover:text-foreground/80">
+            {/* <Link href="/#features" onClick={(e) => handleScroll(e, "features")} className="py-2 transition-colors hover:text-foreground/80">
               Features
             </Link>
-            <Link href="/#pricing" className="py-2 transition-colors hover:text-foreground/80">
+            <Link href="/#pricing" onClick={(e) => handleScroll(e, "pricing")} className="py-2 transition-colors hover:text-foreground/80">
               Pricing
             </Link>
-            <Link href="/#testimonials" className="py-2 transition-colors hover:text-foreground/80">
+            <Link href="/#testimonials" onClick={(e) => handleScroll(e, "testimonials")} className="py-2 transition-colors hover:text-foreground/80">
               Testimonials
-            </Link>
-            <Link href="/blog" className="py-2 transition-colors hover:text-foreground/80">
+            </Link> */}
+            {/* <Link href="/blog" className="py-2 transition-colors hover:text-foreground/80">
               Blog
-            </Link>
+            </Link> */}
             <div className="flex flex-col gap-2 pt-2">
               <Link href="/login">
                 <Button variant="ghost" className="w-full justify-start">

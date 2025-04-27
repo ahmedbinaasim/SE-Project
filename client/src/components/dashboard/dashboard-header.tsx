@@ -124,7 +124,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { Bell, Menu, Plus } from "lucide-react"
+import { Menu, Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { logoutUser } from "../../services/auth-service"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
@@ -188,7 +188,7 @@ export function DashboardHeader() {
             </SheetContent>
           </Sheet>
           <Link href="/dashboard" className="flex items-center gap-2">
-            <span className="text-xl font-bold">NoteGenius</span>
+            <span className="text-xl font-bold ml-6">NoteGenius</span>
           </Link>
         </div>
         <div className="flex items-center gap-4">
@@ -206,15 +206,15 @@ export function DashboardHeader() {
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/ocr">OCR Scan</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              {/* <DropdownMenuItem asChild>
                 <Link href="/dashboard/notes/import">Import Notes</Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="ghost" size="icon">
+          {/* <Button variant="ghost" size="icon">
             <Bell className="h-5 w-5" />
             <span className="sr-only">Notifications</span>
-          </Button>
+          </Button> */}
           <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
