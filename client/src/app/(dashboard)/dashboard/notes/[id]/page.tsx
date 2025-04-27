@@ -7,20 +7,20 @@ import { NoteCollaborators } from "../../../../../components/notes/note-collabor
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../../components/ui/tabs"
 
 type Props = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+
+export async function generateMetadata({ }: Props): Promise<Metadata> {
   return {
     title: "View Note - NoteGenius",
-    description: "View and edit your note"
+    description: "View and edit your note",
   }
 }
 
-export default function NotePage({ params }: Props) {
+export default async function NotePage({ params }: Props) {
   // Convert params.id to a string to ensure it's a primitive value
-  const noteId = String(params.id)
+  const noteId = String((await params).id)
   
   return (
     <DashboardShell>
