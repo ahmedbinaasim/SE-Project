@@ -22,7 +22,7 @@ const app = express();
 // Middleware
 // Middleware
 app.use(cors({
-  origin: 'https://notes-genius.vercel.app', // Replace with your Vercel frontend URL
+  origin: ['https://notes-genius.vercel.app', 'http://localhost:3000'], // Replace with your Vercel frontend URL
   credentials: true // Optional: if your app uses cookies or auth headers
 }));
 app.use(express.json());
