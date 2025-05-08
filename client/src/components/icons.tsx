@@ -22,6 +22,8 @@ import {
     Twitter,
     User,
     X,
+    EyeOff,
+    Eye,
     type LucideIcon,
   } from "lucide-react"
   
@@ -46,6 +48,8 @@ import {
     sun: SunMedium,
     moon: Moon,
     laptop: Laptop,
+    eyeOff: EyeOff,
+    eye: Eye,
     google: ({ ...props }: LucideProps) => (
       <svg
         aria-hidden="true"
